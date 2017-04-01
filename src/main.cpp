@@ -22,7 +22,7 @@ int main(void)
 
     /* Step3: Read the ADC value */
     int compteurAR = 0;
-    while(compteurAR < 1)
+    while(compteurAR < 3)
 {
     int i = 20;
     //int j = 0;
