@@ -13,7 +13,7 @@ int test_servo(void)
 Servo *monServo = new Servo();
 //monServo->init();
 monServo->setPin(4);
-monServo->setPeriode(120);
+monServo->setPeriod(120);
 
 monServo->afficherCaracteristiques();
 
