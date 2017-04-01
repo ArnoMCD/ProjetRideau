@@ -8,6 +8,7 @@
 #ifndef SERVO_H_
 #define SERVO_H_
 #include "Peripherique.h"
+#include "mraa.h"
 
 class Servo : public Peripherique {
 
@@ -19,6 +20,8 @@ public:
 	virtual void setPeriod(int periode);
 	virtual int getPeriod();
 	virtual void init();
+	virtual void activer();
+	virtual void desactiver();
 	virtual void afficherCaracteristiques();
 
 };
