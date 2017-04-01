@@ -13,7 +13,7 @@
 class Servo : public Peripherique {
 
 protected:
-	int period;
+	int period; //Periode en us
 	mraa_pwm_context pwmPinNumber;
 
 public:
