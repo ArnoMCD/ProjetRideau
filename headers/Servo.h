@@ -13,13 +13,14 @@ class Servo : public Peripherique {
 
 protected:
 	int period;
+	mraa_pwm_context pwmPinNumber;
+
 public:
-	virtual void setPeriode(int periode);
-	virtual int getPeriode();
+	virtual void setPeriod(int periode);
+	virtual int getPeriod();
 	virtual void init();
 	virtual void afficherCaracteristiques();
-	//virtual int getPin();
-	//virtual void setPin(int pin);
+
 };
 
 

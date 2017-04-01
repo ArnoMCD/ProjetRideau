@@ -21,6 +21,7 @@ int Servo::getPeriod()
 
 void Servo::init()
 {
+	pwmPinNumber = mraa_pwm_init(pin_number);
 }
 
 void Servo::afficherCaracteristiques()
