@@ -9,12 +9,12 @@
 
 using namespace std;
 
-void Servo::setPeriode(int periode)
+void Servo::setPeriod(int periode)
 {
 	period = periode;
 }
 
-int Servo::getPeriode()
+int Servo::getPeriod()
 {
 	return period;
 }
