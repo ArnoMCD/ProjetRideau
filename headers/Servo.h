@@ -19,7 +19,7 @@ protected:
 public:
 	virtual void setPeriod(int periode);
 	virtual int getPeriod();
-	virtual void init();
+	virtual bool init();
 	virtual void activer();
 	virtual void desactiver();
 	virtual void afficherCaracteristiques();

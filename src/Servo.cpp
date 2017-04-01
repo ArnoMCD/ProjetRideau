@@ -11,7 +11,7 @@ using namespace std;
 
 void Servo::setPeriod(int periode)
 {
-	if (pwmPinNumber != 0)
+	if (this->init())
 	{
 		mraa_pwm_period_us(pwmPinNumber, periode);
 		period = periode;
@@ -27,14 +27,15 @@ int Servo::getPeriod()
 	return period;
 }
 
-void Servo::init()
+bool Servo::init()
 {
 	pwmPinNumber = mraa_pwm_init(pin_number);
+	return true;
 }
 
 void Servo::activer()
 {
-	if (pwmPinNumber != 0)
+	if (this->init())
 	{
     mraa_pwm_enable(pwmPinNumber, 1);
 	}
@@ -46,7 +47,7 @@ void Servo::activer()
 
 void Servo::desactiver()
 {
-	if (pwmPinNumber != 0)
+	if (this->init())
 	{
     mraa_pwm_enable(pwmPinNumber, 0);
 	}
