@@ -22,6 +22,7 @@ public:
 	virtual bool init();
 	virtual void activer();
 	virtual void desactiver();
+	virtual void dutyCycle(float pourcentage);
 	virtual void afficherCaracteristiques();
 
 };
