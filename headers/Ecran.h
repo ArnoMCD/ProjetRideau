@@ -17,7 +17,7 @@ class Ecran
 protected:
 	 mraa_i2c_context m_i2c_lcd_control, m_i2c_lcd_rgb;
 public:
-	virtual void init();
+	virtual bool init();
 	virtual int afficheTemp(float temperature);
 };
 

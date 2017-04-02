@@ -11,7 +11,7 @@
 #include "mraa.h"
 
 
-class CapteurTemp
+class CapteurTemp : public Peripherique
 {
 protected:
 	float adcValue;    // ADC value read into this variable
@@ -20,7 +20,7 @@ protected:
 	mraa_aio_context adcPin;
 
 public :
-	virtual int init();
+	virtual bool init();
 	virtual float calculTemp();
 	virtual float readADCValue();
 };

@@ -4,7 +4,7 @@
  *  Created on: 2 avr. 2017
  *      Author: florent
  */
-#include "Ecran.h"
+#include "../headers/Ecran.h"
 
 #include <mraa/i2c.h>
 #include <unistd.h>
@@ -31,6 +31,39 @@ int m_bus=0;
 int m_lcd_control_address=0x3E; // A voir où on les définit ???
 int m_rgb_control_address=0x62;
 
+mraa_result_t i2cData (mraa_i2c_context ctx, uint8_t value) {
+    mraa_result_t error = MRAA_SUCCESS;
+
+    uint8_t data[2] = { LCD_DATA, value };
+    error = mraa_i2c_address (ctx, m_lcd_control_address);
+    error = mraa_i2c_write (ctx, data, 2);
+
+    return error;
+}
+
+
+
+mraa_result_t i2Cmd (mraa_i2c_context ctx, uint8_t value) {
+    mraa_result_t error = MRAA_SUCCESS;
+
+    uint8_t data[2] = { LCD_CMD, value };
+    error = mraa_i2c_address (ctx, m_lcd_control_address);
+    error = mraa_i2c_write (ctx, data, 2);
+
+    return error;
+}
+
+mraa_result_t i2cReg (mraa_i2c_context ctx, int deviceAdress, int addr, uint8_t value) {
+    mraa_result_t error = MRAA_SUCCESS;
+
+    uint8_t data[2] = { addr, value };
+    error = mraa_i2c_address (ctx, deviceAdress);
+    error = mraa_i2c_write (ctx, data, 2);
+
+    return error;
+}
+
+
 bool Ecran::init()
 {
     m_i2c_lcd_control = mraa_i2c_init(m_bus);
@@ -39,7 +72,7 @@ bool Ecran::init()
     m_i2c_lcd_rgb = mraa_i2c_init(m_bus);
     mraa_i2c_address(m_i2c_lcd_rgb, m_rgb_control_address);
     usleep(50000);
-    i2Cmd (m_i2c_lcd_control, LCD_FUNCTIONSET | LCD_2LINE);
+    i2Cmd(m_i2c_lcd_control, LCD_FUNCTIONSET | LCD_2LINE);
     usleep(4500);
     i2Cmd (m_i2c_lcd_control, LCD_FUNCTIONSET | LCD_2LINE);
     usleep(4500);
@@ -63,7 +96,7 @@ bool Ecran::init()
     return true;
 }
 
-int Ecran::AfficheTemp(float temperature)
+int Ecran::afficheTemp(float temperature)
 {
 	if (init())
 	{

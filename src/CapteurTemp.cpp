@@ -4,24 +4,27 @@
  *  Created on: 1 avr. 2017
  *      Author: florent
  */
-#include "CapteurTemp.h"
+#include "../headers/CapteurTemp.h"
 #include "mraa.h"
 #include <stdio.h>
 #include <math.h>
 
 using namespace std;
 
-int CapteurTemp:: init() // si pas int, comment retourner adcPin ? (utilisé dans readADCValue)
+const int B  = 4275;         // B value for thermistor
+const int R0 = 100;          // R0 is 100k ohms
+
+bool CapteurTemp:: init() // si pas int, comment retourner adcPin ? (utilisé dans readADCValue)
 {
-	adcPin = mraa_aio_init(TEMP_ADC_PIN);
-	return adcPin;
+	adcPin = mraa_aio_init(pin_number);
+	return true;
 }
 
 float CapteurTemp::readADCValue()
 {
 	if (init() != 0)
 	{
-		adcValue = mraa_aio_read();
+		adcValue = mraa_aio_read(adcPin);
 		return adcValue;
 	}
 	else
@@ -33,6 +36,7 @@ float CapteurTemp::readADCValue()
 
 float CapteurTemp::calculTemp()
 {
+	float R;
 	if (readADCValue() !=0)
 		{
 	    	R = 1023.0/((float)adcValue)-1.0;    // Promote to float

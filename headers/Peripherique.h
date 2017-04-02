@@ -15,7 +15,7 @@ protected :
 public :
 	virtual int getPin();
 	virtual void setPin(int pin);
-	virtual void init() = 0;
+	virtual bool init() = 0;
 	virtual void afficherCaracteristiques() = 0;
 };
 
