@@ -7,22 +7,18 @@
 
 #ifndef HEADERS_CAPTEURTEMP_H_
 #define HEADERS_CAPTEURTEMP_H_
-#include "Peripherique.h"
+#include "Capteur.h"
 #include "mraa.h"
 
 
-class CapteurTemp : public Peripherique
+class CapteurTemp : public Capteur
 {
 protected:
-	float adcValue;    // ADC value read into this variable
-	float r;           // Resistance
-	float temperature; //
-	mraa_aio_context adcPin;
+	//float R;           // Resistance
+	float temperature;
 
 public :
-	virtual bool init();
 	virtual float calculTemp();
-	virtual float readADCValue();
 };
 
 
