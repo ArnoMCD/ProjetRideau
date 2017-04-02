@@ -30,12 +30,13 @@ int Servo::getPeriod()
 bool Servo::init()
 {
 	pwmPinNumber = mraa_pwm_init(pin_number);
-	return true;
+	if(pwmPinNumber != NULL) return true;
+	else return false;
 }
 
 void Servo::activer()
 {
-	if (this->init())
+	if (pwmPinNumber != NULL)
 	{
     mraa_pwm_enable(pwmPinNumber, 1);
 	}
@@ -47,7 +48,7 @@ void Servo::activer()
 
 void Servo::desactiver()
 {
-	if (this->init())
+	if (pwmPinNumber != NULL)
 	{
     mraa_pwm_enable(pwmPinNumber, 0);
 	}
