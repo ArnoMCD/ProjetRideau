@@ -12,7 +12,7 @@
 
 class Servo : public Peripherique {
 
-protected:
+public: // Public --> Juste pour tester en désactivant sans passer ar désactiver
 	int period; //Periode en us
 	mraa_pwm_context pwmPinNumber;
 

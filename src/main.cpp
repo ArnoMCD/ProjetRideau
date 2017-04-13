@@ -1,50 +1,55 @@
-#include <stdio.h>
-#include "mraa.h"
-#include <math.h>           // for the log function
+/*
+ * main.cpp
+ *
+ *  Created on: 30 mars 2017
+ *      Author: florent
+ */
 
-#define SERVO_PIN    3    // ADC pin is 0
-
-//using namespace mraa;
-
-int main(void)
-{
-    mraa_pwm_context  pwmPin;
-
-    /* Step1: Initialize the mraa */
-    mraa_init();
-
-    /* Step2: Initlaize the ADC pin */
-    pwmPin = mraa_pwm_init(SERVO_PIN);
-
-    mraa_pwm_enable(pwmPin, 1);
-
-    mraa_pwm_period_us(pwmPin, 5000);
-
-    /* Step3: Read the ADC value */
-    int compteurAR = 0;
-    while(compteurAR < 3)
-{
-    int i = 20;
-    //int j = 0;
-    while(i<65)
-    {
-        mraa_pwm_write(pwmPin,i*0.01);
-        usleep(5000);
-        i++;
-    }
-    while(i>0)
-    {
-        mraa_pwm_write(pwmPin,i*0.01);
-        usleep(5000);
-        i--;
-    }
-    compteurAR++;
-}
-    //mraa_pwm_write(0.2);
-    //usleep(2
-
-    mraa_pwm_enable(pwmPin, 0);
+#include "../headers/Servo.h"
+#include <mraa.h>
 
 
-    return 0;
+int main1(void) {
+	int compteurAR = 0;
+	int i = 20;
+
+	mraa_init();
+
+	Servo *monServo = new Servo();
+
+	monServo->setPin(3);
+
+	if (monServo->init())
+	{
+		monServo->activer();
+		monServo->setPeriod(20000);
+
+		while (compteurAR < 4)
+		{
+			i = 20;
+			while (i<55)
+			{
+				monServo->dutyCycle(i*0.01);
+				usleep(5000);
+				i++;
+			}
+
+			while(i>20)
+			{
+				monServo->dutyCycle(i*0.01);
+				usleep(5000);
+				i--;
+			}
+
+			compteurAR++;
+		}
+		//usleep(1000000);
+		monServo->afficherCaracteristiques();
+		monServo->desactiver();
+		free(monServo);
+		// Marche pas
+		//mraa_pwm_enable(monServo->pwmPinNumber, 0); // Ne marche pas non plus
+	}
+
+	return 0;
 }

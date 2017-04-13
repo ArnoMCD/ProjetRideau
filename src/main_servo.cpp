@@ -8,7 +8,8 @@
 #include "../headers/Servo.h"
 #include <mraa.h>
 
-int test_servo(void) {
+
+int main(void) {
 	int compteurAR = 0;
 	int i = 20;
 
@@ -21,19 +22,19 @@ int test_servo(void) {
 	if (monServo->init())
 	{
 		monServo->activer();
-		monServo->setPeriod(5000);
+		monServo->setPeriod(20000);
 
-		while (compteurAR < 3)
+		while (compteurAR < 4)
 		{
 			i = 20;
-			while (i<65)
+			while (i<55)
 			{
 				monServo->dutyCycle(i*0.01);
 				usleep(5000);
 				i++;
 			}
 
-			while(i>0)
+			while(i>20)
 			{
 				monServo->dutyCycle(i*0.01);
 				usleep(5000);
@@ -42,11 +43,13 @@ int test_servo(void) {
 
 			compteurAR++;
 		}
-
+		//usleep(1000000);
+		monServo->afficherCaracteristiques();
 		monServo->desactiver();
+		free(monServo);
+		// Marche pas
+		//mraa_pwm_enable(monServo->pwmPinNumber, 0); // Ne marche pas non plus
 	}
-
-	monServo->afficherCaracteristiques();
 
 	return 0;
 }

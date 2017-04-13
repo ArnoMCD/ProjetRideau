@@ -20,6 +20,7 @@ protected:
 public :
 	virtual bool init();
 	virtual float readADCValue();
+	virtual void afficherCaracteristiques();
 };
 
 
