@@ -14,7 +14,7 @@ using namespace std;
 
 
 
-int main(void)
+int main3(void)
 {
 	mraa_init();
 
@@ -28,12 +28,17 @@ int main(void)
 	monEcran -> init();
 	int compteur_seconde(0);
 
-	while (compteur_seconde < 100)
+	while (compteur_seconde < 10)
 	{
-		monEcran -> afficheTemp(monCapteurTemp->calculTemp());
+		monEcran -> afficherTemp(monCapteurTemp->calculTemp());
+		sleep(1);
 		++compteur_seconde;
 	}
-	mraa_i2c_stop(monEcran->m_i2c_lcd_control);
+
+	monEcran->arreter();
+
+	free(monEcran);
+	free(monCapteurTemp);
 
 	return 0;
 

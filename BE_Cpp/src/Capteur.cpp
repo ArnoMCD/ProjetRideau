@@ -30,7 +30,7 @@ float Capteur::readADCValue()
 	else
 	{
 		//générer un message d'erreur avec try catch tout ça pour dire d'appeler init() avant readADCValue()
-		return 0;
+		return -1;
 	}
 }
 

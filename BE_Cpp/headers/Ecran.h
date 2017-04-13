@@ -16,11 +16,12 @@ class Ecran : public Peripherique
 {
 public:
 	 mraa_i2c_context m_i2c_lcd_control, m_i2c_lcd_rgb;
-	 int pin_number;
 public:
 	virtual bool init();
-	virtual int afficheTemp(float temperature);
+	virtual int afficher(float x);
+	virtual int afficherTemp(float temperature);
 	virtual void afficherCaracteristiques();
+	virtual void arreter();
 };
 
 

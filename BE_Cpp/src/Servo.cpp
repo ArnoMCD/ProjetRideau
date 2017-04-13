@@ -57,5 +57,5 @@ dutyCycle(float pourcentage) {
 
 void Servo::afficherCaracteristiques() {
 	cout << "La période du servo est de " << this->getPeriod() << endl;
-	cout << "Le PIN est" << this->getPin()<< endl;
+	cout << "Le numero de PIN est " << this->getPin()<< endl;
 }

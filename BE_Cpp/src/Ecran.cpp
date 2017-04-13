@@ -70,6 +70,11 @@ void Ecran::afficherCaracteristiques()
 
 }
 
+void Ecran::arreter()
+{
+	mraa_i2c_stop(m_i2c_lcd_control);
+}
+
 bool Ecran::init()
 {
     m_i2c_lcd_control = mraa_i2c_init(pin_number);
@@ -109,9 +114,9 @@ std::string Convert (float number){
     return buff.str();
 }
 
-int Ecran::afficheTemp(float temperature)
+int Ecran::afficherTemp(float temperature)
 {
-	if (init())
+	if (m_i2c_lcd_control != NULL)
 	{
 	    int row=1, column=2;
 	    int row_addr[] = { 0x80, 0xc0, 0x14, 0x54};
@@ -120,6 +125,7 @@ int Ecran::afficheTemp(float temperature)
 		i2Cmd (m_i2c_lcd_control, LCD_CLEARDISPLAY);
 	    std::string strTemperature = Convert(temperature);
 		// std::string strTemperature = to_string(temperature); // Ne marche plus ?
+	    														// ARNO : si mais faut ajouter lstdc++ au compilateur :)
 		strTemperature = strTemperature.substr(0,4);
 		std::string msg= "Temp : "+ strTemperature +" C" ;
 		usleep(30000);
@@ -131,14 +137,41 @@ int Ecran::afficheTemp(float temperature)
 		//usleep(100000);
 
 	    }
-		return 0;
+		return 1;
 	}
 	else
 	{
 		// Message avec try / catch .. init avant
-		return 1234;
+		return -1;
 	}
 }
 
+int Ecran::afficher(float x)
+{
+	if (m_i2c_lcd_control != NULL)
+	{
+	    int row=1, column=2;
+	    int row_addr[] = { 0x80, 0xc0, 0x14, 0x54};
+	    uint8_t offset = ((column % 16) + row_addr[row]);
+	    i2Cmd (m_i2c_lcd_control, offset);
+		i2Cmd (m_i2c_lcd_control, LCD_CLEARDISPLAY);
+	    std::string strX = Convert(x);
 
+		usleep(30000);
+
+		for (std::string::size_type i = 0; i < strX.size(); ++i) {
+		i2cData (m_i2c_lcd_control, strX[i]);
+
+
+		//usleep(100000);
+
+	    }
+		return 1;
+	}
+	else
+	{
+		// Message avec try / catch .. init avant
+		return -1;
+	}
+}
 
