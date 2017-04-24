@@ -9,7 +9,7 @@
 #include <mraa.h>
 
 
-int main(void) {
+int main12(void) {
 	int compteurAR = 0;
 	int i = 20;
 
