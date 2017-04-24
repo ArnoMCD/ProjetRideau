@@ -175,3 +175,32 @@ int Ecran::afficher(float x)
 	}
 }
 
+int Ecran::afficher(std::string msg)
+{
+	if (m_i2c_lcd_control != NULL)
+	{
+	    int row=1, column=2;
+	    int row_addr[] = { 0x80, 0xc0, 0x14, 0x54};
+	    uint8_t offset = ((column % 16) + row_addr[row]);
+	    i2Cmd (m_i2c_lcd_control, offset);
+		i2Cmd (m_i2c_lcd_control, LCD_CLEARDISPLAY);
+	    //std::string strMsg(msg);
+
+		usleep(30000);
+
+		for (std::string::size_type i = 0; i < msg.size(); ++i) {
+		i2cData (m_i2c_lcd_control, msg[i]);
+
+
+		//usleep(100000);
+
+	    }
+		return 1;
+	}
+	else
+	{
+		// Message avec try / catch .. init avant
+		return -1;
+	}
+}
+

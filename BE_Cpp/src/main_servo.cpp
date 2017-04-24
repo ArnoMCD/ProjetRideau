@@ -7,11 +7,13 @@
 
 #include "../headers/Servo.h"
 #include <mraa.h>
+#include <iostream>
 
+using namespace std;
 
-int main(void) {
+int main5(void) {
 	int compteurAR = 0;
-	int i = 20;
+	//int i = 20;
 
 	mraa_init();
 
@@ -24,23 +26,9 @@ int main(void) {
 		monServo->activer();
 		monServo->setPeriod(20000);
 
-		while (compteurAR < 4)
+		while (compteurAR < 1)
 		{
-			i = 20;
-			while (i<55)
-			{
-				monServo->dutyCycle(i*0.01);
-				usleep(5000);
-				i++;
-			}
-
-			while(i>20)
-			{
-				monServo->dutyCycle(i*0.01);
-				usleep(5000);
-				i--;
-			}
-
+			monServo->allerRetour();
 			compteurAR++;
 		}
 		//usleep(1000000);
@@ -49,6 +37,11 @@ int main(void) {
 		free(monServo);
 		// Marche pas
 		//mraa_pwm_enable(monServo->pwmPinNumber, 0); // Ne marche pas non plus
+	}
+
+	else
+	{
+		cerr << "error : cannot init servo" << endl;
 	}
 
 	return 0;

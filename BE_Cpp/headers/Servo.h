@@ -24,6 +24,7 @@ public:
 	virtual void desactiver();
 	virtual void dutyCycle(float pourcentage);
 	virtual void afficherCaracteristiques();
+	virtual void allerRetour();
 
 };
 
