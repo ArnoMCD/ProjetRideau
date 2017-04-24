@@ -11,7 +11,8 @@
 
 using namespace std;
 
-int main5(void) {
+int main12(void) {
+>>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau.git
 	int compteurAR = 0;
 	//int i = 20;
 
