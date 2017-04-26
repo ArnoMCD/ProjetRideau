@@ -48,11 +48,11 @@ void CapteurNum:: callIntrHandler()
 }
 
 // si mode = 0 alors mode = 1 / si mode = 1 alors mode = 0
-int CapteurNum:: IntrHandler(void *arg)
-{
-	mode = (mode+1)%2;
-	return mode;
-}
+//int CapteurNum:: intrHandler(void *arg)
+//{
+//	mode = (mode+1)%2;
+//	return mode;
+//}
 
 //Stop the interruption handler
 void capteurNum:: stopIntrHandler()

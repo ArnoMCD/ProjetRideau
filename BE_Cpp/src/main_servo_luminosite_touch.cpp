@@ -37,8 +37,13 @@ int main7(void) {
 
 	Servo *monServo = new Servo();
 	Capteur *monCapteurLum = new Capteur();
-	Capteur *monCapteurTouch = new Capteur();
+	CapteurNum *monCapteurTouch = new CapteurNum();
 	Ecran *monEcran = new Ecran();
+
+	monCapteurNum->init();
+	monCapteurNum->defineAsInput();
+	monCapteurNum->callIntrHandler();
+
 
 	/**** INITIALISATION ****/
 	monCapteurLum->setPin(1);
@@ -61,7 +66,7 @@ int main7(void) {
 	monServo->setPeriod(20000);
 
 	while (1) {
-		lum = monCapteurLum->readADCValue();
+		lum = monCapteurLum->readCapteurValue();
 
 		switch (mode) {
 		case LUMINOSITE:
