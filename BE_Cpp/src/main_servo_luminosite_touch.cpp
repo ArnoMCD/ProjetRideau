@@ -19,17 +19,19 @@
 
 using namespace std;
 
+int lum;
+int etat_lum = SOMBRE;
+volatile int mode = LUMINOSITE;
+int modePrecedent;
+
 void touchHandler(void)
 {
 	mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
 }
 
-int main(void) {
+int main7(void) {
 
-	int lum;
-	int etat_lum = SOMBRE;
-	volatile int mode = LUMINOSITE;
-	int modePrecedent;
+
 
 	mraa_init();
 

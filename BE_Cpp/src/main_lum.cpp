@@ -14,7 +14,7 @@ using namespace std;
 /* PLAGE CAPTEUR DE LUMINOSITE : 0 (noir complet) -> 770 (sature assez vite) */
 
 
-int main4(void)
+int main(void)
 {
 	mraa_init();
 
