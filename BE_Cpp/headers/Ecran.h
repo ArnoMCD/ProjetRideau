@@ -8,6 +8,10 @@
 #ifndef HEADERS_ECRAN_H_
 #define HEADERS_ECRAN_H_
 #include "Peripherique.h"
+
+#include <unistd.h>
+#include <iostream>
+#include <string>
 #include <mraa/i2c.h>
 #include <mraa/aio.h>
 #include <mraa/gpio.h>
@@ -19,6 +23,7 @@ public:
 public:
 	virtual bool init();
 	virtual int afficher(float x);
+	virtual int afficher(std::string msg);
 	virtual int afficherTemp(float temperature);
 	virtual void afficherCaracteristiques();
 	virtual void arreter();

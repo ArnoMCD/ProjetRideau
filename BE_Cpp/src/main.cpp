@@ -25,7 +25,7 @@ int main1(void) {
 			monServo->activer();
 			monServo->setPeriod(20000);
 
-			monServo->dutyCycle(0);
+			monServo->dutyCycle(0.01);
 
 			sleep(3);
 			monServo->afficherCaracteristiques();

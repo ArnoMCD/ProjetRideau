@@ -10,11 +10,12 @@
 using namespace std;
 
 void Servo::setPeriod(int periode) {
-	if (this->init()) {
+	if (pwmPinNumber != NULL) {
 		mraa_pwm_period_us(pwmPinNumber, periode);
 		period = periode;
 	} else {
 		//générer un message d'erreur avec try catch tout ça pour dire d'appeler init() avant setPeriod()
+		cerr << "error : pwmPinNumber is NULL, can't setPeriod" << endl;
 	}
 }
 
@@ -35,6 +36,7 @@ void Servo::activer() {
 		mraa_pwm_enable(pwmPinNumber, 1);
 	} else {
 		//générer un message d'erreur avec try catch tout ça pour dire d'appeler init() avant activer()
+		cerr << "error : pwmPinNumber is NULL, cant activer" << endl;
 	}
 }
 
@@ -43,6 +45,7 @@ void Servo::desactiver() {
 		mraa_pwm_enable(pwmPinNumber, 0);
 	} else {
 		//générer un message d'erreur avec try catch tout ça pour dire d'appeler init() avant desactiver()
+		cerr << "error : pwmPinNumber is NULL, cant desactiver" << endl;
 	}
 }
 
@@ -52,10 +55,29 @@ dutyCycle(float pourcentage) {
 		mraa_pwm_write(pwmPinNumber, pourcentage);
 	} else {
 		//générer un message d'erreur avec try catch tout ça pour dire d'appeler init() avant desactiver()
+		cerr << "error : pwmPinNumber is NULL, cant dutyCycle" << endl;
 	}
 }
 
 void Servo::afficherCaracteristiques() {
 	cout << "La période du servo est de " << this->getPeriod() << endl;
 	cout << "Le numero de PIN est " << this->getPin()<< endl;
+}
+
+void Servo::allerRetour() {
+
+	int i = 20;
+	while (i<65)
+	{
+		this->dutyCycle(i*0.01);
+		usleep(5000);
+		i++;
+	}
+
+	while(i>20)
+	{
+		this->dutyCycle(i*0.01);
+		usleep(5000);
+		i--;
+	}
 }
