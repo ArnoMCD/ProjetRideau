@@ -1,4 +1,4 @@
-#include <SPI.h>
+
 #include <Ethernet.h>
 #include <mraa/i2c.h>
 #include <unistd.h>
