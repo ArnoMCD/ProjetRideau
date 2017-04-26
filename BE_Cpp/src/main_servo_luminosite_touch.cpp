@@ -24,7 +24,7 @@ int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
 int modePrecedent;
 
-void touchHandler(void)
+void intrHandler(void)
 {
 	mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
 }
@@ -40,9 +40,13 @@ int main7(void) {
 	CapteurNum *monCapteurTouch = new CapteurNum();
 	Ecran *monEcran = new Ecran();
 
+	// Toutes les fonctions liées aux interruptions (en vrac)
 	monCapteurNum->init();
 	monCapteurNum->defineAsInput();
 	monCapteurNum->callIntrHandler();
+	monCapteurNum->stopIntrHandler();
+	monCapteurNul->closePin();
+
 
 
 	/**** INITIALISATION ****/

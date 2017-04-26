@@ -44,7 +44,7 @@ void CapteurNum::afficherCaracteristiques()
 // Appelle le handler quand la pin du bouton poussoir passe de 0 à 1
 void CapteurNum:: callIntrHandler()
 {
-	mraa_gpio_isr(m_gpio, MRAA_GPIO_EDGE_RISING, intrHandler, NULL);
+	mraa_gpio_isr(poussoirPinNumber, MRAA_GPIO_EDGE_RISING, intrHandler, NULL);
 }
 
 // si mode = 0 alors mode = 1 / si mode = 1 alors mode = 0

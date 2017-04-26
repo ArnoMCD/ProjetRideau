@@ -22,7 +22,7 @@ public :
 	virtual void defineAsInput();
 
 	virtual void callIntrHandler();
-	virtual int intrHandler();
+	//virtual int intrHandler();
 	virtual void stopIntrHandler();
 	virtual void closePin();
 
