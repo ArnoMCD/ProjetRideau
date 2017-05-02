@@ -41,8 +41,8 @@
 							</tool>
 							<tool id="com.intel.iotdevkit.poky.i586.tool.gnu.c.linker.82767806" name="IoT Poky 32-Bit GCC Linker" superClass="com.intel.iotdevkit.poky.i586.tool.gnu.c.linker"/>
 							<tool id="com.intel.iotdevkit.poky.i586.tool.gnu.cpp.linker.679137468" name="IoT Poky 32-Bit G++ Linker" superClass="com.intel.iotdevkit.poky.i586.tool.gnu.cpp.linker">
-								<option id="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.libs.1321906985" name="Libraries" superClass="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.libs" valueType="libs"/>
-								<option id="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.misc.other.2038459893" name="Miscellaneous" superClass="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.misc.other" value="-lmraa" valueType="string"/>
+								<option id="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.libs.1321906985" name="Libraries" superClass="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.libs"/>
+								<option id="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.misc.other.2038459893" name="Miscellaneous" superClass="com.intel.iotdevkit.poky.i586.gnu.cpp.option.link.misc.other" value="-lmraa -ethernet" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1845076983" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
