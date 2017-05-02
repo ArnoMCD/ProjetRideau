@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 #include <Ethernet.h>
 #include <mraa/i2c.h>

@@ -10,26 +10,41 @@
 #include "../headers/Servo.h"
 #include "../headers/Ecran.h"
 #include "../headers/Capteur.h"
+#include "../headers/CapteurNum.h"
 
 #define SEUIL_LUM 500
 #define LUMINEUX 1
 #define SOMBRE 0
 #define LUMINOSITE 0
 #define INTERNET 1
+#define HAUT 1
+#define BAS 1
 
 using namespace std;
 
 int lum;
 int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
-int modePrecedent;
+int modePrecedent = INTERNET;
+int etat_poussoir = 0;
 
-void intrHandler(void)
+
+//*******IT HANDLER********
+void intrHandler(void *arg)
 {
-	mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
+	if (etat_poussoir == 0)
+	{
+		mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
+		cout << "aaa" << endl;
+		etat_poussoir++;
+	}
+	else if (etat_poussoir == 1)
+	{
+		etat_poussoir--;
+	}
 }
 
-int main7(void) {
+int main(void) {
 
 
 
@@ -40,12 +55,9 @@ int main7(void) {
 	CapteurNum *monCapteurTouch = new CapteurNum();
 	Ecran *monEcran = new Ecran();
 
-	// Toutes les fonctions liées aux interruptions (en vrac)
-	monCapteurNum->init();
-	monCapteurNum->defineAsInput();
-	monCapteurNum->callIntrHandler();
-	monCapteurNum->stopIntrHandler();
-	monCapteurNul->closePin();
+
+
+
 
 
 
@@ -66,15 +78,23 @@ int main7(void) {
 	if (!(monServo->init()))
 		cerr << "error : cannot init Servo" << endl;
 
+	monCapteurTouch->defineAsInput();
+	mraa_gpio_isr(monCapteurTouch->getPoussoirPinNumber(), MRAA_GPIO_EDGE_BOTH, intrHandler, NULL);
+	//monCapteurTouch->callIntrHandler(intrHandler); //A FAIRE MARCHER
+
 	//monServo->activer();
 	monServo->setPeriod(20000);
 
+	//*******LOOOP*******
 	while (1) {
-		lum = monCapteurLum->readCapteurValue();
-
+		lum = monCapteurLum->readADCValue();
+		cout << monCapteurTouch->readCapteurValue()<< endl;
 		switch (mode) {
 		case LUMINOSITE:
-			if (modePrecedent != LUMINOSITE) monEcran->afficher("MODE: LUMINOSITE");
+			if (modePrecedent != LUMINOSITE)
+				{
+				monEcran->afficher("MODE: LUMINOSITE");
+				}
 
 			if (etat_lum == SOMBRE && lum > SEUIL_LUM) //on passe de l'ombre à la lumière
 			{
@@ -100,12 +120,16 @@ int main7(void) {
 		case INTERNET:
 			if (modePrecedent != INTERNET) monEcran->afficher("MODE: INTERNET");
 			modePrecedent = INTERNET;
+			usleep(100000);
+
 
 			break;
 		}
 
 	}
 
+	monCapteurTouch->stopIntrHandler();
+	monCapteurTouch->closePin();
 	monServo->afficherCaracteristiques();
 	monServo->desactiver();
 	free(monServo);

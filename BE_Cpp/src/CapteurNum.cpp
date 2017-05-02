@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "../headers/CapteurNum.h"
+#include <iostream>
 
 
 using namespace std;
@@ -36,15 +37,15 @@ int CapteurNum::readCapteurValue()
 // Affiche état du bouton poussoir
 void CapteurNum::afficherCaracteristiques()
 {
-	if (this->readCapteurValue != 0)
+	if (this->readCapteurValue() != 0)
 			cout << "The button is being pushed" << endl;
 	else cout << "The button is not being pushed" << endl;
 }
 
 // Appelle le handler quand la pin du bouton poussoir passe de 0 à 1
-void CapteurNum:: callIntrHandler()
+void CapteurNum:: callIntrHandler(void (*ptrHandler)(void*))
 {
-	mraa_gpio_isr(poussoirPinNumber, MRAA_GPIO_EDGE_RISING, intrHandler, NULL);
+	mraa_gpio_isr(poussoirPinNumber, MRAA_GPIO_EDGE_RISING, ptrHandler, NULL);
 }
 
 // si mode = 0 alors mode = 1 / si mode = 1 alors mode = 0
@@ -55,13 +56,13 @@ void CapteurNum:: callIntrHandler()
 //}
 
 //Stop the interruption handler
-void capteurNum:: stopIntrHandler()
+void CapteurNum:: stopIntrHandler()
 {
 	mraa_gpio_isr_exit(poussoirPinNumber);
 }
 
 // Exit
-void capteurNum:: closePin()
+void CapteurNum:: closePin()
 {
 	mraa_gpio_close(poussoirPinNumber);
 }
