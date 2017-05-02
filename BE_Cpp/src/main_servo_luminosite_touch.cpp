@@ -26,7 +26,6 @@ int lum;
 int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
 int modePrecedent = INTERNET;
-
 int etat_poussoir = 0;
 
 
@@ -36,7 +35,6 @@ void intrHandler(void *arg)
 	if (etat_poussoir == 0)
 	{
 		mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
-		cout << "aaa" << endl;
 		etat_poussoir++;
 	}
 	else if (etat_poussoir == 1)
@@ -74,23 +72,21 @@ int main(void) {
 	monEcran->setPin(0);
 	if (!(monEcran->init()))
 		cerr << "error : cannot init Ecran" << endl;
-	//monEcran -> init();
 
 	monServo->setPin(3);
 	if (!(monServo->init()))
 		cerr << "error : cannot init Servo" << endl;
 
 	monCapteurTouch->defineAsInput();
-	mraa_gpio_isr(monCapteurTouch->getPoussoirPinNumber(), MRAA_GPIO_EDGE_BOTH, intrHandler, NULL);
-	//monCapteurTouch->callIntrHandler(intrHandler); //A FAIRE MARCHER
+	monCapteurTouch->callIntrHandler(intrHandler);
 
-	//monServo->activer();
 	monServo->setPeriod(20000);
 
 	//*******LOOOP*******
 	while (1) {
 		lum = monCapteurLum->readADCValue();
-		cout << monCapteurTouch->readCapteurValue()<< endl;
+		//cout << monCapteurTouch->readCapteurValue()<< endl;
+
 		switch (mode) {
 		case LUMINOSITE:
 			if (modePrecedent != LUMINOSITE)
@@ -120,11 +116,9 @@ int main(void) {
 			modePrecedent = LUMINOSITE;
 			break;
 		case INTERNET:
-			//cout << "tamere_internet";
 			if (modePrecedent != INTERNET) monEcran->afficher("MODE: INTERNET");
 			modePrecedent = INTERNET;
 			usleep(100000);
-
 
 			break;
 		}

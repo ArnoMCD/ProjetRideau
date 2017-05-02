@@ -1,36 +1,36 @@
 
 
-#include <Ethernet.h>
-#include <mraa/i2c.h>
-#include <unistd.h>
-#include <iostream>
-#include <string>
-#include <mraa/aio.h>
-#include <mraa/gpio.h>
+//#include <Ethernet.h>
+//#include <mraa/i2c.h>
+//#include <unistd.h>
+//#include <iostream>
+//#include <string>
+//#include <mraa/aio.h>
+//#include <mraa/gpio.h>
 
-#include "../headers/Ecran.h"
-#include "../headers/Capteur.h"
+//#include "../headers/Ecran.h"
+//#include "../headers/Capteur.h"
 
 
-using namespace std;
+//using namespace std;
 
-int main(void)
-{
+//int main(void)
+//{
 
-boolean incoming = 0;
+//boolean incoming = 0;
 
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
-byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDA, 0x02 };
-IPAddress ip(169,254,73,223); //<<< ENTER YOUR IP ADDRESS HERE!!!
+//byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDA, 0x02 };
+//IPAddress ip(169,254,73,223); //<<< ENTER YOUR IP ADDRESS HERE!!!
 
 // Initialize the Ethernet server library
 // with the IP address and port you want to use
 // (port 80 is default for HTTP):
-EthernetServer server(80);
+//EthernetServer server(80);
 
 //void setup()
-=======
+//=======
 ////i#include <Ethernet.h>
 //#include <mraa/i2c.h>
 //#include <unistd.h>
@@ -46,7 +46,7 @@ EthernetServer server(80);
 //using namespace std;
 //
 //int main4(void)
->>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau
+//>>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau
 //{
 //
 //boolean incoming = 0;
