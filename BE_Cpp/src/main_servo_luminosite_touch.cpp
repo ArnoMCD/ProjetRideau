@@ -22,14 +22,14 @@ using namespace std;
 int lum;
 int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
-int modePrecedent;
+int modePrecedent = INTERNET;
 
 void touchHandler(void)
 {
 	mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
 }
 
-int main7(void) {
+int main(void) {
 
 
 
@@ -52,6 +52,7 @@ int main7(void) {
 	monEcran->setPin(0);
 	if (!(monEcran->init()))
 		cerr << "error : cannot init Ecran" << endl;
+	//monEcran -> init();
 
 	monServo->setPin(3);
 	if (!(monServo->init()))
@@ -65,7 +66,10 @@ int main7(void) {
 
 		switch (mode) {
 		case LUMINOSITE:
-			if (modePrecedent != LUMINOSITE) monEcran->afficher("MODE: LUMINOSITE");
+			if (modePrecedent != LUMINOSITE)
+				{
+				monEcran->afficher("MODE: LUMINOSITE");
+				}
 
 			if (etat_lum == SOMBRE && lum > SEUIL_LUM) //on passe de l'ombre à la lumière
 			{
@@ -89,6 +93,7 @@ int main7(void) {
 			modePrecedent = LUMINOSITE;
 			break;
 		case INTERNET:
+			//cout << "tamere_internet";
 			if (modePrecedent != INTERNET) monEcran->afficher("MODE: INTERNET");
 			modePrecedent = INTERNET;
 
