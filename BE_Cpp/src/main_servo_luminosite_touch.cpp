@@ -78,16 +78,15 @@ int main(void) {
 		cerr << "error : cannot init Servo" << endl;
 
 	monCapteurTouch->defineAsInput();
-	mraa_gpio_isr(monCapteurTouch->getPoussoirPinNumber(), MRAA_GPIO_EDGE_BOTH, intrHandler, NULL);
-	//monCapteurTouch->callIntrHandler(intrHandler); //A FAIRE MARCHER
+	monCapteurTouch->callIntrHandler(intrHandler);
 
-	//monServo->activer();
 	monServo->setPeriod(20000);
 
 	//*******LOOOP*******
 	while (1) {
 		lum = monCapteurLum->readADCValue();
-		cout << monCapteurTouch->readCapteurValue()<< endl;
+		//cout << monCapteurTouch->readCapteurValue()<< endl;
+
 		switch (mode) {
 		case LUMINOSITE:
 			if (modePrecedent != LUMINOSITE)
@@ -120,7 +119,6 @@ int main(void) {
 			if (modePrecedent != INTERNET) monEcran->afficher("MODE: INTERNET");
 			modePrecedent = INTERNET;
 			usleep(100000);
-
 
 			break;
 		}

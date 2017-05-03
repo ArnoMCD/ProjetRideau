@@ -1,5 +1,6 @@
 
 
+<<<<<<< HEAD
 
 #include <mraa/i2c.h>
 #include <unistd.h>
@@ -7,12 +8,21 @@
 #include <string>
 #include <mraa/aio.h>
 #include <mraa/gpio.h>
+=======
+//#include <Ethernet.h>
+//#include <mraa/i2c.h>
+//#include <unistd.h>
+//#include <iostream>
+//#include <string>
+//#include <mraa/aio.h>
+//#include <mraa/gpio.h>
+>>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau
 
-#include "../headers/Ecran.h"
-#include "../headers/Capteur.h"
+//#include "../headers/Ecran.h"
+//#include "../headers/Capteur.h"
 
 
-using namespace std;
+//using namespace std;
 
 //int main(void)
 //{
@@ -45,7 +55,12 @@ using namespace std;
 //
 //using namespace std;
 //
+<<<<<<< HEAD
 //int main4(void)
+=======
+//int main4(void)
+//>>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau
+>>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau
 //{
 //
 //boolean incoming = 0;
