@@ -35,7 +35,6 @@ void intrHandler(void *arg)
 	if (etat_poussoir == 0)
 	{
 		mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
-		cout << "aaa" << endl;
 		etat_poussoir++;
 	}
 	else if (etat_poussoir == 1)
