@@ -70,14 +70,14 @@ void Servo::allerRetour() {
 	while (i<65)
 	{
 		this->dutyCycle(i*0.01);
-		usleep(5000);
+		usleep(2500);
 		i++;
 	}
 
 	while(i>20)
 	{
 		this->dutyCycle(i*0.01);
-		usleep(5000);
+		usleep(2500);
 		i--;
 	}
 }
