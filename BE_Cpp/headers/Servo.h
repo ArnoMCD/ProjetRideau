@@ -23,8 +23,10 @@ public:
 	virtual void activer();
 	virtual void desactiver();
 	virtual void dutyCycle(float pourcentage);
+	virtual void pulseWidth(float us);
 	virtual void afficherCaracteristiques();
 	virtual void allerRetour();
+
 
 };
 

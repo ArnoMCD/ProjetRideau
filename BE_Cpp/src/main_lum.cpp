@@ -14,11 +14,9 @@ using namespace std;
 /* PLAGE CAPTEUR DE LUMINOSITE : 0 (noir complet) -> 770 (sature assez vite) */
 
 
-<<<<<<< HEAD
-int main58(void)
-=======
-int main57(void)
->>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau
+
+int main37(void)
+
 {
 	mraa_init();
 

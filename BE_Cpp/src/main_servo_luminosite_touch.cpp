@@ -16,7 +16,7 @@
 #define LUMINEUX 1
 #define SOMBRE 0
 #define LUMINOSITE 0
-#define INTERNET 1
+#define MANUEL 1
 #define HAUT 1
 #define BAS 1
 
@@ -25,7 +25,7 @@ using namespace std;
 int lum;
 int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
-int modePrecedent = INTERNET;
+int modePrecedent = MANUEL;
 int etat_poussoir = 0;
 
 
@@ -99,7 +99,7 @@ int main(void) {
 				etat_lum = LUMINEUX;
 				monServo->activer();
 				for (int i = 0; i < 5; i++)
-					monServo->allerRetour(); //pour le test on considère que 5AR = on a monté le rideau
+					monServo->pulseWidth(1000); //pour le test on considère que 5AR = on a monté le rideau
 				monServo->desactiver();
 			}
 			else if (etat_lum == LUMINEUX && lum < SEUIL_LUM) //on passe de la lumière à l'ombre
@@ -107,7 +107,7 @@ int main(void) {
 				etat_lum = SOMBRE;
 				monServo->activer();
 				for (int i = 0; i < 5; i++)
-					monServo->allerRetour(); //pour le test on considère que 5AR = on a descendu le rideau
+					monServo->pulseWidth(5000); //pour le test on considère que 5AR = on a descendu le rideau
 				monServo->desactiver();
 			}
 			else {
@@ -115,9 +115,9 @@ int main(void) {
 			}
 			modePrecedent = LUMINOSITE;
 			break;
-		case INTERNET:
-			if (modePrecedent != INTERNET) monEcran->afficher("MODE: INTERNET");
-			modePrecedent = INTERNET;
+		case MANUEL:
+			if (modePrecedent != MANUEL) monEcran->afficher("MODE: MANUEL");
+			modePrecedent = MANUEL;
 			usleep(100000);
 
 			break;
