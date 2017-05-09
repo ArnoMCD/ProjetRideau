@@ -90,7 +90,6 @@ int main(void) {
 	//*******LOOOP*******
 	while (1) {
 		lum = monCapteurLum->readADCValue();
-		//cout << monCapteurTouch->readCapteurValue()<< endl;
 
 		switch (mode) {
 		case LUMINOSITE:
