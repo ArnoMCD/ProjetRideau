@@ -28,7 +28,6 @@ int lum;
 int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
 int modePrecedent = MANUEL;
-
 int etat_poussoir = 0;
 int etat_volet = FERME;
 
@@ -43,8 +42,8 @@ void intrHandler(void *arg)
 	}
 	else if (etat_poussoir == 1)
 		etat_poussoir--;
-
 }
+
 
 int main(void) {
 
@@ -59,17 +58,12 @@ int main(void) {
 	CapteurNum *monCapteurTouchManuel = new CapteurNum();
 
 
-
-
-
-
-
 	/**** INITIALISATION ****/
 	monCapteurLum->setPin(1);
 	if (!(monCapteurLum->init()))
 		cerr << "error : cannot init capteurLum" << endl;
 
-	monCapteurTouch->setPin(3);
+	monCapteurTouch->setPin(5);
 	if (!(monCapteurTouch->init()))
 		cerr << "error : cannot init capteurTouch" << endl;
 
@@ -81,7 +75,7 @@ int main(void) {
 	if (!(monEcran->init()))
 		cerr << "error : cannot init Ecran" << endl;
 
-	monServo->setPin(5);
+	monServo->setPin(3);
 	if (!(monServo->init()))
 		cerr << "error : cannot init Servo" << endl;
 
@@ -91,7 +85,7 @@ int main(void) {
 
 	monCapteurTouchManuel->defineAsInput();
 
-	monServo->setPeriod(20000);
+	monServo->setPeriod(SERVO_PERIOD);
 
 	//*******LOOOP*******
 	while (1) {
@@ -110,24 +104,25 @@ int main(void) {
 			{
 				etat_lum = LUMINEUX;
 				monServo->activer();
-				for (int i = 0; i < 5; i++)
-					monServo->pulseWidth(1000); //pour le test on considère que 5AR = on a monté le rideau
+				monServo->dutyCycle(MAX_DUTY_CYCLE); //Ouverture volet
+				sleep(1);
 				monServo->desactiver();
+				etat_volet = OUVERT;
 			}
 			else if (etat_lum == LUMINEUX && lum < SEUIL_LUM) //on passe de la lumière à l'ombre
 			{
 				etat_lum = SOMBRE;
 				monServo->activer();
-				for (int i = 0; i < 5; i++)
-					monServo->pulseWidth(5000); //pour le test on considère que 5AR = on a descendu le rideau
+				monServo->dutyCycle(MIN_DUTY_CYCLE); //Fermeture volet
+				sleep(1);
 				monServo->desactiver();
+				etat_volet = FERME;
 			}
 			else {
 				usleep(100000);
 			}
 			modePrecedent = LUMINOSITE;
 			break;
-
 
 		case MANUEL:
 			if (modePrecedent != MANUEL) monEcran->afficher("MODE: MANUEL");
@@ -137,16 +132,16 @@ int main(void) {
 				if (etat_volet == FERME)
 				{
 					monServo->activer();
-					for (int i = 0; i < 5; i++)
-						monServo->allerRetour(); //pour le test on considère que 5AR = Ouvrir volet
+					monServo->dutyCycle(MAX_DUTY_CYCLE); //Ouverture volet
+					sleep(1);
 					monServo->desactiver();
 					etat_volet = OUVERT;
 				}
 				else if (etat_volet == OUVERT)
 				{
 					monServo->activer();
-					for (int i = 0; i < 2; i++)
-						monServo->allerRetour(); //pour le test on considère que 2AR = Fermer volet
+					monServo->dutyCycle(MIN_DUTY_CYCLE); //Fermeture volet
+					sleep(1);
 					monServo->desactiver();
 					etat_volet = FERME;
 				}

@@ -49,8 +49,7 @@ void Servo::desactiver() {
 	}
 }
 
-void Servo::
-dutyCycle(float pourcentage) {
+void Servo::dutyCycle(float pourcentage) {
 	if (pwmPinNumber != NULL) {
 		mraa_pwm_write(pwmPinNumber, pourcentage);
 	} else {
@@ -75,18 +74,12 @@ void Servo::afficherCaracteristiques() {
 
 void Servo::allerRetour() {
 
-	int i = 20;
-	while (i<65)
-	{
-		this->dutyCycle(i*0.01);
-		usleep(2500);
-		i++;
-	}
-
-	while(i>20)
-	{
-		this->dutyCycle(i*0.01);
-		usleep(2500);
-		i--;
-	}
+	this->dutyCycle(MAX_DUTY_CYCLE);
+	sleep(1);
+	this->dutyCycle(MIN_DUTY_CYCLE);
+	sleep(1);
 }
+
+
+
+
