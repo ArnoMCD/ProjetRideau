@@ -19,6 +19,8 @@
 #define MANUEL 1
 #define HAUT 1
 #define BAS 1
+#define FERME 0
+#define OUVERT 1
 
 using namespace std;
 
@@ -26,7 +28,9 @@ int lum;
 int etat_lum = SOMBRE;
 volatile int mode = LUMINOSITE;
 int modePrecedent = MANUEL;
+
 int etat_poussoir = 0;
+int etat_volet = FERME;
 
 
 //*******IT HANDLER********
@@ -34,13 +38,12 @@ void intrHandler(void *arg)
 {
 	if (etat_poussoir == 0)
 	{
-		mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(INTERNET)
+		mode = (mode+1)%2; //mode = 0(LUMINOSITE) ou 1(MANUEL)
 		etat_poussoir++;
 	}
 	else if (etat_poussoir == 1)
-	{
 		etat_poussoir--;
-	}
+
 }
 
 int main(void) {
@@ -53,6 +56,7 @@ int main(void) {
 	Capteur *monCapteurLum = new Capteur();
 	CapteurNum *monCapteurTouch = new CapteurNum();
 	Ecran *monEcran = new Ecran();
+	CapteurNum *monCapteurTouchManuel = new CapteurNum();
 
 
 
@@ -65,20 +69,27 @@ int main(void) {
 	if (!(monCapteurLum->init()))
 		cerr << "error : cannot init capteurLum" << endl;
 
-	monCapteurTouch->setPin(2);
+	monCapteurTouch->setPin(3);
 	if (!(monCapteurTouch->init()))
+		cerr << "error : cannot init capteurTouch" << endl;
+
+	monCapteurTouchManuel->setPin(4);
+	if (!(monCapteurTouchManuel->init()))
 		cerr << "error : cannot init capteurTouch" << endl;
 
 	monEcran->setPin(0);
 	if (!(monEcran->init()))
 		cerr << "error : cannot init Ecran" << endl;
 
-	monServo->setPin(3);
+	monServo->setPin(5);
 	if (!(monServo->init()))
 		cerr << "error : cannot init Servo" << endl;
 
+
 	monCapteurTouch->defineAsInput();
 	monCapteurTouch->callIntrHandler(intrHandler);
+
+	monCapteurTouchManuel->defineAsInput();
 
 	monServo->setPeriod(20000);
 
@@ -89,6 +100,7 @@ int main(void) {
 
 		switch (mode) {
 		case LUMINOSITE:
+			monServo->desactiver();
 			if (modePrecedent != LUMINOSITE)
 				{
 				monEcran->afficher("MODE: LUMINOSITE");
@@ -115,9 +127,30 @@ int main(void) {
 			}
 			modePrecedent = LUMINOSITE;
 			break;
+
+
 		case MANUEL:
 			if (modePrecedent != MANUEL) monEcran->afficher("MODE: MANUEL");
 			modePrecedent = MANUEL;
+			if (monCapteurTouchManuel->readCapteurValue())
+			{
+				if (etat_volet == FERME)
+				{
+					monServo->activer();
+					for (int i = 0; i < 5; i++)
+						monServo->allerRetour(); //pour le test on considère que 5AR = Ouvrir volet
+					monServo->desactiver();
+					etat_volet = OUVERT;
+				}
+				else if (etat_volet == OUVERT)
+				{
+					monServo->activer();
+					for (int i = 0; i < 2; i++)
+						monServo->allerRetour(); //pour le test on considère que 2AR = Fermer volet
+					monServo->desactiver();
+					etat_volet = FERME;
+				}
+			}
 			usleep(100000);
 
 			break;

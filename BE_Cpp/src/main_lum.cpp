@@ -15,8 +15,9 @@ using namespace std;
 
 
 
-int main37(void)
 
+int main58(void)
+>>>>>>> branch 'master' of https://github.com/ArnoMCD/ProjetRideau.git
 {
 	mraa_init();
 
