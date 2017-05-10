@@ -61,9 +61,5 @@ void CapteurNum:: closePin()
 	mraa_gpio_close(poussoirPinNumber);
 }
 
-// Affiche le mode
-void CapteurNum:: printMode(int mode)
-{
-	cout << mode;
-}
+
 

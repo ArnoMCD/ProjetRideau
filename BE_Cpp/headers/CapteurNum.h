@@ -14,7 +14,6 @@ class CapteurNum : public Capteur
 {
 protected :
 	mraa_gpio_context poussoirPinNumber;
-	int mode;
 public :
 
 	virtual bool init();
@@ -26,9 +25,6 @@ public :
 	virtual void callIntrHandler(void (*ptrHandler)(void*));
 	virtual void stopIntrHandler();
 	virtual void closePin();
-
-	//virtual void printCounter(int compteur);
-	virtual void printMode(int mode);
 
 	virtual mraa_gpio_context getPoussoirPinNumber() const {
 		return poussoirPinNumber;
