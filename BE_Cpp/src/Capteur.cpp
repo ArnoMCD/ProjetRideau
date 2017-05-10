@@ -11,9 +11,7 @@
 
 using namespace std;
 
-bool Capteur:: init() // si pas int, comment retourner adcPin ? (utilisé dans readADCValue)
-					  // ARNO : adcPin est un attribut de Capteur donc pas besoin de return il est modifié direct :)
-					  // Ah mais oui ! thanks
+bool Capteur:: init()
 {
 	adcPin = mraa_aio_init(pin_number);
 	if (adcPin != NULL) return true;
@@ -29,7 +27,6 @@ float Capteur::readADCValue()
 	}
 	else
 	{
-		//générer un message d'erreur avec try catch tout ça pour dire d'appeler init() avant readADCValue()
 		return -1;
 	}
 }

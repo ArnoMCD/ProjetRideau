@@ -21,8 +21,4 @@ public :
 	virtual float calculTemp();
 };
 
-
-
-
-
 #endif /* HEADERS_CAPTEURTEMP_H_ */

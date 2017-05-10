@@ -6,23 +6,26 @@
 #include <mraa/gpio.h>
 
 #include "../headers/Ecran.h"
-#include "../headers/CapteurTemp.h"
+#include "../headers/Capteur.h"
 
 
 using namespace std;
 
+// ********** TEST DU CAPTEUR DE LUMINOSITE SEUL *************
+
+/* PLAGE CAPTEUR DE LUMINOSITE : 0 (noir complet) -> 770 (sature assez vite) */
 
 
+int main_lum(void)
 
-int main3(void)
 {
 	mraa_init();
 
-	CapteurTemp *monCapteurTemp = new CapteurTemp();
+	Capteur *monCapteurLum = new Capteur();
 	Ecran *monEcran = new Ecran();
 
-	monCapteurTemp->setPin(0);
-	monCapteurTemp->init();
+	monCapteurLum->setPin(1);
+	monCapteurLum->init();
 
 	monEcran -> setPin(0);
 	monEcran -> init();
@@ -30,7 +33,7 @@ int main3(void)
 
 	while (compteur_seconde < 10)
 	{
-		monEcran -> afficherTemp(monCapteurTemp->calculTemp());
+		monEcran -> afficher(monCapteurLum->readADCValue());
 		sleep(1);
 		++compteur_seconde;
 	}
@@ -38,7 +41,7 @@ int main3(void)
 	monEcran->arreter();
 
 	free(monEcran);
-	free(monCapteurTemp);
+	free(monCapteurLum);
 
 	return 0;
 

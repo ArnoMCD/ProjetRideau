@@ -42,20 +42,14 @@ void CapteurNum::afficherCaracteristiques()
 	else cout << "The button is not being pushed" << endl;
 }
 
-// Appelle le handler quand la pin du bouton poussoir passe de 0 à 1
+// Appelle le handler sur front montant ET descendant (que cette option fonctionnelle sur la carte)
+// Le problème est géré dans IntrHandler dans le Main.
 void CapteurNum:: callIntrHandler(void (*ptrHandler)(void*))
 {
 	mraa_gpio_isr(poussoirPinNumber, MRAA_GPIO_EDGE_BOTH, ptrHandler, NULL);
 }
 
-// si mode = 0 alors mode = 1 / si mode = 1 alors mode = 0
-//int CapteurNum:: intrHandler(void *arg)
-//{
-//	mode = (mode+1)%2;
-//	return mode;
-//}
-
-//Stop the interruption handler
+// Stop the interruption handler
 void CapteurNum:: stopIntrHandler()
 {
 	mraa_gpio_isr_exit(poussoirPinNumber);

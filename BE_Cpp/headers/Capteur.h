@@ -10,7 +10,6 @@
 #include "Peripherique.h"
 #include "mraa.h"
 
-
 class Capteur : public Peripherique
 {
 protected:

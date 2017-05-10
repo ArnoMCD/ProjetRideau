@@ -16,6 +16,9 @@
 #include <mraa/aio.h>
 #include <mraa/gpio.h>
 
+// ****** Le driver du moteur CC n'est pas compatible avec la Galileo ! ******
+// ****** En voici la classe mais le Test_moteurCC n'est pas fonctionnel ******
+
 class MoteurCC : public Peripherique
 {
 protected:

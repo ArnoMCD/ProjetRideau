@@ -14,6 +14,7 @@ using namespace std;
 const int B  = 4275;         // B value for thermistor
 const int R0 = 100;          // R0 is 100k ohms
 
+// Clacule la température
 float CapteurTemp::calculTemp()
 {
 	float R;

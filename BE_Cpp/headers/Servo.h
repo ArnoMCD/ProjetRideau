@@ -16,11 +16,12 @@
 
 class Servo : public Peripherique {
 
-public: // Public --> Juste pour tester en désactivant sans passer ar désactiver
+protected: //
 	int period; //Periode en us
 	mraa_pwm_context pwmPinNumber;
 
 public:
+	// Toutes les méthodes utilisées par un servo
 	virtual void setPeriod(int periode);
 	virtual int getPeriod();
 	virtual bool init();

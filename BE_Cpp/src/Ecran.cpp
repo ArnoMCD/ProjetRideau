@@ -65,9 +65,9 @@ mraa_result_t i2cReg (mraa_i2c_context ctx, int deviceAdress, int addr, uint8_t 
     return error;
 }
 
+// Inutile
 void Ecran::afficherCaracteristiques()
 {
-
 }
 
 void Ecran::arreter()
@@ -106,7 +106,7 @@ bool Ecran::init()
 
     return true;
 }
-
+// Convertir un float en string proprement
 #include <sstream>
 std::string Convert (float number){
     std::ostringstream buff;
@@ -114,6 +114,7 @@ std::string Convert (float number){
     return buff.str();
 }
 
+// Affiche la température
 int Ecran::afficherTemp(float temperature)
 {
 	if (m_i2c_lcd_control != NULL)
@@ -146,6 +147,7 @@ int Ecran::afficherTemp(float temperature)
 	}
 }
 
+// Affiche un float
 int Ecran::afficher(float x)
 {
 	if (m_i2c_lcd_control != NULL)
@@ -174,7 +176,7 @@ int Ecran::afficher(float x)
 		return -1;
 	}
 }
-
+// Affiche un string
 int Ecran::afficher(std::string msg)
 {
 	if (m_i2c_lcd_control != NULL)

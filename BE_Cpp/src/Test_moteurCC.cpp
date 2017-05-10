@@ -17,8 +17,11 @@
 
 using namespace std;
 
+// ********** TEST DU MOTEUR CC SEUL *************
+// ----------- DRIVER NON COMPATIBLE AVEC LA GALILEO -----------
+// ********** PROGRAMME NON FONCTIONNEL *************
 
-int main58(void)
+int mainm_moteurCC(void)
 
 {
 	mraa_init();
