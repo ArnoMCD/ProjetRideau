@@ -58,7 +58,7 @@ mraa_result_t i2Cmd (mraa_i2c_context ctx, uint8_t value) {
 mraa_result_t i2cReg (mraa_i2c_context ctx, int deviceAdress, int addr, uint8_t value) {
     mraa_result_t error = MRAA_SUCCESS;
 
-    uint8_t data[2] = { addr, value };
+    uint8_t data[2] = { (uint8_t)addr, value };
     error = mraa_i2c_address (ctx, deviceAdress);
     error = mraa_i2c_write (ctx, data, 2);
 

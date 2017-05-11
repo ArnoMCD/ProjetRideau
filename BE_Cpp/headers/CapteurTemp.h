@@ -19,6 +19,7 @@ protected:
 
 public :
 	virtual float calculTemp();
+	virtual ~CapteurTemp() {};
 };
 
 #endif /* HEADERS_CAPTEURTEMP_H_ */

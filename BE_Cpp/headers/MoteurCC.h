@@ -28,6 +28,7 @@ public:
 	virtual void afficherCaracteristiques();
 	virtual void arreter();
 	virtual int dutyCycle(float duty);
+	virtual ~MoteurCC() {};
 };
 
 

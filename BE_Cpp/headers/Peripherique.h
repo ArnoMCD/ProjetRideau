@@ -17,6 +17,7 @@ public :
 	virtual void setPin(int pin);
 	virtual bool init() = 0;
 	virtual void afficherCaracteristiques() = 0;
+	virtual ~Peripherique() {};
 };
 
 #endif /* PERIPHERIQUE_H_ */

@@ -26,6 +26,8 @@ public :
 	virtual void stopIntrHandler();
 	virtual void closePin();
 
+	virtual ~CapteurNum() {};
+
 	virtual mraa_gpio_context getPoussoirPinNumber() const {
 		return poussoirPinNumber;
 	}

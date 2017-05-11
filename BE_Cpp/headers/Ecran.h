@@ -27,6 +27,7 @@ public:
 	virtual int afficherTemp(float temperature);
 	virtual void afficherCaracteristiques();
 	virtual void arreter();
+	virtual ~Ecran() {};
 };
 
 

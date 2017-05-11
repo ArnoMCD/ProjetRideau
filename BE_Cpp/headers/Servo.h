@@ -32,6 +32,8 @@ public:
 	virtual void afficherCaracteristiques();
 	virtual void allerRetour();
 
+	virtual ~Servo() {};
+
 
 };
 
