@@ -7,10 +7,10 @@
 
 #ifndef HEADERS_CAPTEURNUM_H_
 #define HEADERS_CAPTEURNUM_H_
-#include "Capteur.h"
+#include "Peripherique.h"
 #include "mraa.h"
 
-class CapteurNum : public Capteur
+class CapteurNum : public Peripherique
 {
 protected :
 	mraa_gpio_context poussoirPinNumber;
